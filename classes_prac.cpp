@@ -40,6 +40,9 @@ class Person
     code_ = code;
   }
 
+  virtual ~Person()
+  {}
+
   void addElement (const Element &e)
   {
     arr_.push_back (e);

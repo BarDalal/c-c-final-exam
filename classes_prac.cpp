@@ -119,7 +119,7 @@ class Place
   Place<T> &p)
   /* Prints sorted by name (map's key) */
   {
-    for (auto val: p.con) // val is the pair itself
+    for (const auto &val: p.con) // val is the pair itself
     {
       output << val.first << std::endl;
     }
@@ -176,6 +176,7 @@ int main ()
 //  p.add (p2); // it's not possible to add Person<double> to Place<int>
   p.add (p3);
   std::cout << p; // prints sorted according to name: bar, david, miryam
+                  // doing it twice
 
   // To be continued
 

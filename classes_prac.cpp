@@ -102,5 +102,7 @@ int main ()
   p1.print (); // call Person's print
   t1.print(); // call Teacher's print
 
+  delete dup;
+
   return 0;
 }

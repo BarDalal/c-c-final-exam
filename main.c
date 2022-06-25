@@ -50,7 +50,7 @@ int main ()
     arr[i] = malloc (columns * sizeof (int)); // pointer to int
     if (arr[i] == NULL)
     {
-      for (int j = 0; j < i - 1; j++)
+      for (int j = 0; j < i; j++)
       {
         free (arr[j]);
       }

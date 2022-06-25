@@ -46,6 +46,11 @@ class Person
     arr_.push_back (e);
   }
 
+  const std::string &get_name ()
+  {
+    return name_;
+  }
+
   virtual Person<T> *Clone () const
   {
     return new Person<T> (*this);
@@ -56,13 +61,6 @@ class Person
     std::cout << name_ << " is a " << age_ << " years old Person whose code "
                                               "is " << code_ << std::endl;
   }
-
-  friend std::ostream &operator<< (const std::ostream &output, const
-  Person<T> &p)
-  {
-    p.print ();
-  }
-
 };
 
 template<typename T>
@@ -89,12 +87,6 @@ class Teacher : public Person<T>
               << std::endl;
   }
 
-  friend std::ostream &operator<< (const std::ostream &output, const
-  Teacher<T> &t)
-  {
-    t.print ();
-  }
-
  private:
   int _xp;
 };
@@ -112,11 +104,33 @@ class Place
 
   Place () = default;
 
-  bool add(const Person<T> &p)
+  bool add (Person<T> &p)
+  /* No duplicates by name! */
   {
-    return true; // To be continued
+    if (con.find (p.get_name ()) == con.end ())
+    {
+      con.insert ({p.get_name (), p.Clone ()});
+      return true;
+    }
+    return false;
   }
 
+  friend std::ostream &operator<< (std::ostream &output, const
+  Place<T> &p)
+  /* Prints sorted by name (map's key) */
+  {
+    for (auto val: p.con) // val is the pair itself
+    {
+      output << val.first << std::endl;
+    }
+
+    for (auto it = p.con.begin (); it != p.con.end (); it++) // it is like a
+      // pointer
+    {
+      output << it->first << std::endl;
+    }
+    return output;
+  }
 
   // Defining all begin, end combinations with those of std::map
   iterator begin ()
@@ -149,10 +163,19 @@ int main ()
   Person<int> *dup = p1.Clone ();
   p1.print (); // call Person's print
   t1.print (); // call Teacher's print
-  std::cout << p1; // call Person's print
-  std::cout << t1; // call Teacher's print
-
+  std::cout << t1.get_name () << std::endl; // prints miryam
   delete dup;
+
+  std::cout << std::endl << "Next.." << std::endl;
+
+  Place<int> p;
+  Person<double> p2 ("yuval", 30, 3.5);
+  Person<int> p3 ("david", 22, 1);
+  p.add (p1);
+  p.add (t1);
+//  p.add (p2); // it's not possible to add Person<double> to Place<int>
+  p.add (p3);
+  std::cout << p; // prints sorted according to name: bar, david, miryam
 
   // To be continued
 

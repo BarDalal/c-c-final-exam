@@ -70,6 +70,11 @@ class Teacher : public Person<T>
                                                                    (name, age, code), _xp (xp)
   {}
 
+  virtual Teacher<T> *Clone() const
+  {
+    return new Teacher<T>(*this);
+  }
+
   void print () const override
   {
     std::cout << this->name_ << " is a " << this->age_ << " years old "

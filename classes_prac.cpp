@@ -104,12 +104,31 @@ class Place
 
   Place () = default;
 
+  ~Place()
+  {
+    for(const auto &val : con)
+    {
+      delete val.second;
+    }
+  }
+
   bool add (Person<T> &p)
   /* No duplicates by name! */
   {
     if (con.find (p.get_name ()) == con.end ())
     {
       con.insert ({p.get_name (), p.Clone ()});
+      return true;
+    }
+    return false;
+  }
+
+  bool remove(Person<T> &p)
+  {
+    if (con.find (p.get_name()) != con.end())
+    {
+      delete con.find(p.get_name()) -> second;
+      con.erase (con.find(p.get_name()));
       return true;
     }
     return false;
@@ -177,6 +196,9 @@ int main ()
   p.add (p3);
   std::cout << p; // prints sorted according to name: bar, david, miryam
                   // doing it twice
+
+   p.remove (p3);
+   std::cout << "After removing David: " << std::endl << p;
 
   // To be continued
 

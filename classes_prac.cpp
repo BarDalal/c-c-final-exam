@@ -54,7 +54,7 @@ class Person
   virtual void print () const
   {
     std::cout << name_ << " is a " << age_ << " years old Person whose code "
-                                              "is " << code_;
+                                              "is " << code_ << std::endl;
   }
 
 };

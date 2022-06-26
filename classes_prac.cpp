@@ -99,6 +99,7 @@ class Place
   // Defining typedefs:
   typedef Person<T> *value_type;
   typedef typename std::map<std::string, value_type> container_type;
+  typedef typename std::iterator_traits<T> iterator_traits;
   typedef typename container_type::iterator iterator;
   typedef typename container_type::const_iterator const_iterator;
 
@@ -199,6 +200,7 @@ int main ()
 
    p.remove (p3);
    std::cout << "After removing David: " << std::endl << p;
+
 
   // To be continued
 

@@ -158,5 +158,16 @@ int main ()
       break;
   }
 
+  //TODO ASCII stuff:
+  int d1 = 'a';
+  printf ("The ASCII of %c is %d\n", d1, d1); // The ASCII of a is 97
+  char c_a = 'a';
+  printf("The ASCII of %c is %d\n", c_a, c_a); // The ASCII of a is 97
+  int d2 = 97;
+  printf ("The ASCII of %c is %d\n", d2, d2); // The ASCII of a is 97
+  char c_a_1 = 97;
+  printf ("The ASCII of %c is %d\n", c_a_1, c_a_1); // The ASCII of a is 97
+
+
   return 0;
 }
